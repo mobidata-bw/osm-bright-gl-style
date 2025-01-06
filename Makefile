@@ -4,8 +4,8 @@ DATE := $(shell date "+%Y%m%d%H%M%S")
 .PHONY: ansible tilemaker icons
 
 install-ubuntu:
+	sudo apt-get install osmium-tool podman
 	npm install -g @indoorequal/spritezero-cli
-	sudo apt-get install osmium-tool
 
 tiles/baden-wuerttemberg.osm.pbf:
 	curl --create-dirs --fail https://download.geofabrik.de/europe/germany/baden-wuerttemberg-latest.osm.pbf -o $@

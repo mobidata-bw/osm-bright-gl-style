@@ -28,7 +28,7 @@
     }
   },
   "sprite": "https://openmaptiles.github.io/osm-bright-gl-style/sprite",
-  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key={key}",
+  "glyphs": "https://tiles.mobidata-bw.de/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
