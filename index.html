@@ -19,12 +19,11 @@
   var map = new maplibregl.Map({
     container: 'map', // container id
     style: 'style.json', // style URL
-    center: [9.18294, 48.78811], // starting position [lng, lat]
-    zoom: 10, // starting zoom
+    center: [9.18208, 48.77513], // starting position [lng, lat]
+    zoom: 14, // starting zoom
     hash: true
   });
 
-  window.mapboxgl = maplibregl;
   map.addControl(new MaplibreInspect({
     showInspectButton: true,
     showMapPopup: false
