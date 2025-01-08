@@ -15,7 +15,7 @@ tiles/stuttgart.osm.pbf: tiles/baden-wuerttemberg.osm.pbf
 
 tilemaker: tiles/stuttgart.osm.pbf icons
 	cp tilemaker/* tiles
-	jq '. | .settings.filemetadata.tiles=["http://localhost:8080/{z}/{x}/{y}.pbf"]' tilemaker/config-openmaptiles.json > tiles/temp.json
+	jq '. | .settings.filemetadata.tiles=["http://10.70.172.31:8080/{z}/{x}/{y}.pbf"]' tilemaker/config-openmaptiles.json > tiles/temp.json
 	mv tiles/temp.json tiles/config-openmaptiles.json
 
 	podman run \
