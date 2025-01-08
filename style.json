@@ -28,7 +28,7 @@
     }
   },
   "sprite": "https://openmaptiles.github.io/osm-bright-gl-style/sprite",
-  "glyphs": "https://tiles.mobidata-bw.de/fonts/{fontstack}/{range}.pbf",
+  "glyphs": "https://cdn.jsdelivr.net/gh/klokantech/klokantech-gl-fonts@master/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
