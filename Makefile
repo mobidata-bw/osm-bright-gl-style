@@ -34,7 +34,7 @@ tilemaker: tiles/stuttgart.osm.pbf icons
 	cp index.html tiles/tiles
 
 	#jinja2 style.jinja.json -o style.json
-	jq '. | .sources.openmaptiles.url="http://localhost:8080/metadata.json" | .sprite="http://localhost:8080/sprite"' style.json > tiles/tiles/style.json
+	jq '. | .sources.openmaptiles.url="http://10.70.172.31:8080/metadata.json" | .sprite="http://10.70.172.31:8080/sprite"' style.json > tiles/tiles/style.json
 
 	python3 -m http.server 8080 --directory tiles/tiles/
 
