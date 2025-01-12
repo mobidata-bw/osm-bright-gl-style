@@ -28,6 +28,12 @@
     showInspectButton: true,
     showMapPopup: false
   }));
+  map.addControl(new maplibregl.NavigationControl({
+    visualizePitch: true,
+    visualizeRoll: true,
+    showZoom: true,
+    showCompass: true
+  }));
 </script>
 
 </body>
