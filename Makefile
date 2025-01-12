@@ -63,6 +63,13 @@ tileserver: prepare-input
 
 	jq ". | .sources.openmaptiles.url=\"mbtiles://{v3}\" | .sprite=\"{style}\"" style.json > tiles/tiles/style.json
 
+	mkdir -p tiles/tiles/sprites/
+	cp sprite.json tiles/tiles/sprites/style.json
+	cp sprite.png tiles/tiles/sprites/style.png
+
+	cp sprite@2x.json tiles/tiles/sprites/style@2x.json
+	cp sprite@2x.png tiles/tiles/sprites/style@2x.png
+
 	podman run --rm \
     	--name tileserver \
         -v `pwd`/tiles/tiles/:/data:z \

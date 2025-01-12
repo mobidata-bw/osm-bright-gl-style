@@ -1,7 +1,7 @@
 {
   "options": {
     "paths": {
-      "sprites": "/data/",
+      "sprites": "/data/sprites/",
       "fonts": "/data/",
       "styles": "/data/",
       "mbtiles": "/data/"
