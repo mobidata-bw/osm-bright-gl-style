@@ -43,9 +43,26 @@ tilemaker: prepare-input
 		--config=/srv/config-openmaptiles.json \
 		--process=/srv/process-openmaptiles.lua
 
-
 	cp index.html tiles/tiles
 
 	python3 -m http.server 8080 --directory tiles/tiles/
 
 
+tileserver: prepare-input
+	cp tilemaker/tileserver-config.json tiles/tiles
+	podman run \
+		-it \
+		-v $(PWD)/tiles/:/srv:z \
+		--name tilemaker-map \
+		--rm \
+		ghcr.io/leonardehrenfried/tilemaker:latest \
+		/srv/stuttgart.osm.pbf \
+		--output=/srv/tiles/stuttgart.mbtiles  \
+		--config=/srv/config-openmaptiles.json \
+		--process=/srv/process-openmaptiles.lua
+
+	podman run --rm \
+    	--name tileserver \
+        -v `pwd`/tiles/tiles/:/data:z \
+        -p 8080:8080 docker.io/maptiler/tileserver-gl:v5.1.1 \
+        --config tileserver-config.json

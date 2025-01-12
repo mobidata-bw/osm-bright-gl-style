@@ -1,0 +1,30 @@
+{
+  "options": {
+    "paths": {
+      "sprites": "/data/",
+      "fonts": "/data/",
+      "styles": "/data/",
+      "mbtiles": "/data/"
+    },
+    "serveAllFonts": false
+  },
+  "styles": {
+    "nvbw": {
+      "style": "style.json",
+      "serve_data": true,
+      "tilejson": {
+        "bounds": [
+          7.372216,
+          47.18741,
+          10.514946,
+          49.794564
+        ]
+      }
+    }
+  },
+  "data": {
+    "v3": {
+      "mbtiles": "stuttgart.mbtiles"
+    }
+  }
+}
