@@ -17,7 +17,7 @@
     "openmaptiles:mapbox:source:url": "mapbox://openmaptiles.4qljc88t",
     "openmaptiles:version": "3.x"
   },
-  "center": [48.77928, 9.17731],
+  "center": [9.17731, 48.77928],
   "zoom": 14,
   "bearing": 0,
   "pitch": 0,

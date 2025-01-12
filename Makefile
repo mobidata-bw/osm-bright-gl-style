@@ -21,8 +21,6 @@ prepare-input: icons tiles/stuttgart.osm.pbf
 	mv tiles/temp.json tiles/config-openmaptiles.json
 
 	mkdir -p tiles/tiles
-	#jinja2 style.jinja.json -o style.json
-	jq ". | .sources.openmaptiles.url=\"http://$(HOST):8080/metadata.json\" | .sprite=\"http://$(HOST):8080/sprite\"" style.json > tiles/tiles/style.json
 
 	cp -r sprite* tiles/tiles/
 
@@ -31,6 +29,8 @@ icons:
 	spritezero --retina sprite@2x icons
 
 tilemaker: prepare-input
+	#jinja2 style.jinja.json -o style.json
+	jq ". | .sources.openmaptiles.url=\"http://$(HOST):8080/metadata.json\" | .sprite=\"http://$(HOST):8080/sprite\"" style.json > tiles/tiles/style.json
 
 	podman run \
 		-it \
@@ -60,6 +60,8 @@ tileserver: prepare-input
 		--output=/srv/tiles/stuttgart.mbtiles  \
 		--config=/srv/config-openmaptiles.json \
 		--process=/srv/process-openmaptiles.lua
+
+	jq ". | .sources.openmaptiles.url=\"mbtiles://{v3}\" | .sprite=\"{style}\"" style.json > tiles/tiles/style.json
 
 	podman run --rm \
     	--name tileserver \
