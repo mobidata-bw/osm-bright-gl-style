@@ -1,5 +1,7 @@
 SHELL := /bin/bash
 DATE := $(shell date "+%Y%m%d%H%M%S")
+#HOST := "10.70.172.31"
+HOST := "localhost"
 
 .PHONY: ansible tilemaker icons
 
@@ -13,9 +15,9 @@ tiles/baden-wuerttemberg.osm.pbf:
 tiles/stuttgart.osm.pbf: tiles/baden-wuerttemberg.osm.pbf
 	osmium extract tiles/baden-wuerttemberg.osm.pbf --polygon tilemaker/stuttgart.geojson -o $@ --overwrite
 
-tilemaker: tiles/stuttgart.osm.pbf icons
+tilemaker: tiles/stuttgart.osm.pbf icons style.json
 	cp tilemaker/* tiles
-	jq '. | .settings.filemetadata.tiles=["http://10.70.172.31:8080/{z}/{x}/{y}.pbf"]' tilemaker/config-openmaptiles.json > tiles/temp.json
+	jq ". | .settings.filemetadata.tiles=[\"http://$(HOST):8080/{z}/{x}/{y}.pbf\"]" tilemaker/config-openmaptiles.json > tiles/temp.json
 	mv tiles/temp.json tiles/config-openmaptiles.json
 
 	podman run \
@@ -34,7 +36,7 @@ tilemaker: tiles/stuttgart.osm.pbf icons
 	cp index.html tiles/tiles
 
 	#jinja2 style.jinja.json -o style.json
-	jq '. | .sources.openmaptiles.url="http://10.70.172.31:8080/metadata.json" | .sprite="http://10.70.172.31:8080/sprite"' style.json > tiles/tiles/style.json
+	jq ". | .sources.openmaptiles.url=\"http://$(HOST):8080/metadata.json\" | .sprite=\"http://$(HOST):8080/sprite\"" style.json > tiles/tiles/style.json
 
 	python3 -m http.server 8080 --directory tiles/tiles/
 
