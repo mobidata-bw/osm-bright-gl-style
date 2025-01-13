@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 DATE := $(shell date "+%Y%m%d%H%M%S")
-#HOST := "10.70.172.31"
-HOST := "localhost"
+HOST := "10.70.172.31"
+#HOST := "localhost"
 
 .PHONY: ansible tilemaker icons
 
