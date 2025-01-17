@@ -2,6 +2,7 @@ SHELL := /bin/bash
 DATE := $(shell date "+%Y%m%d%H%M%S")
 HOST := "10.70.172.31"
 #HOST := "localhost"
+ANSIBLE_DIR := "../nvbw-digitransit-ansible/files/tileserver/nvbw/"
 
 .PHONY: ansible tilemaker icons
 
@@ -48,30 +49,7 @@ tilemaker: prepare-input
 	python3 -m http.server 8080 --directory tiles/tiles/
 
 
-tileserver: prepare-input
-	cp tilemaker/tileserver-config.json tiles/tiles
-	podman run \
-		-it \
-		-v $(PWD)/tiles/:/srv:z \
-		--name tilemaker-map \
-		--rm \
-		ghcr.io/leonardehrenfried/tilemaker:latest \
-		/srv/stuttgart.osm.pbf \
-		--output=/srv/tiles/stuttgart.mbtiles  \
-		--config=/srv/config-openmaptiles.json \
-		--process=/srv/process-openmaptiles.lua
+copy-to-ansible: icons
+	jq ". | .sources.openmaptiles.url=\"mbtiles://{v3}\" | .sprite=\"{style}\"" style.json > ${ANSIBLE_DIR}/style.json
+	cp sprite* ${ANSIBLE_DIR}
 
-	jq ". | .sources.openmaptiles.url=\"mbtiles://{v3}\" | .sprite=\"{style}\"" style.json > tiles/tiles/style.json
-
-	mkdir -p tiles/tiles/sprites/
-	cp sprite.json tiles/tiles/sprites/style.json
-	cp sprite.png tiles/tiles/sprites/style.png
-
-	cp sprite@2x.json tiles/tiles/sprites/style@2x.json
-	cp sprite@2x.png tiles/tiles/sprites/style@2x.png
-
-	podman run --rm \
-    	--name tileserver \
-        -v `pwd`/tiles/tiles/:/data:z \
-        -p 8080:8080 docker.io/maptiler/tileserver-gl:v5.1.1 \
-        --config tileserver-config.json
