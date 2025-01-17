@@ -2,7 +2,7 @@ SHELL := /bin/bash
 DATE := $(shell date "+%Y%m%d%H%M%S")
 HOST := "10.70.172.31"
 #HOST := "localhost"
-ANSIBLE_DIR := "../nvbw-digitransit-ansible/files/tileserver/nvbw/"
+ANSIBLE_DIR := "../otp-dt-ansible/files/tileserver/nvbw/"
 
 .PHONY: ansible tilemaker icons
 
