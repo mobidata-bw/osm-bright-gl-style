@@ -1,17 +1,28 @@
-# OSM Bright
+# NWBW Bright
 
 A GL JS basemap style showcasing OpenStreetMap. It is using the vector tile schema of [OpenMapTiles](https://github.com/openmaptiles/openmaptiles).
 
 ## Preview
 
-
-Use the map editor in MapTiler Cloud to view and adjust this map. Open the editor and upload style from this repository or host from various styles available on the platform.
-
-[Test updated Bright v2](https://cloud.maptiler.com/maps/editor?map=bright-v2)
-
-Or use the [Maputnik CLI](http://openmaptiles.org/docs/style/maputnik/) to edit and develop the style.
-After you've started Maputnik open the editor on `localhost:8000`.
+To develop the style itself, use the following make command:
 
 ```
-maputnik --watch --file style.json
+make tilemaker
 ```
+
+This does the following:
+
+- This downloads the OSM data for Baden-Württemberg and cuts out the city center of Stuttgart. 
+- Uses tilemaker to build vector tiles for Stuttgart.
+- Starts a web server with a preview of the style.
+
+## Deploying to ansible
+
+If you're satisfied with the style, then use the following make command to copy the style and sprite
+data to the repository [`otp-dt-ansible`](https://github.com/mobidata-bw/otp-dt-ansible).
+
+```
+make copy-to-ansible
+```
+
+Afterwards use the regular ansible deployment process.
