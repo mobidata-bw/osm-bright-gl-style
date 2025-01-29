@@ -420,6 +420,18 @@ function way_function()
 		isBoundary = true
 	end
 
+
+
+	-- MobiData BW
+	if amenity=="parking" then
+                Layer("poi", is_closed)
+                SetNameAttributes()
+		-- über Attribute wird später in der styls.json referenziert
+		Attribute("class", "amenity")
+		Attribute("subclass", "parking")
+        end
+
+
 	-- Administrative boundaries
 	-- https://openmaptiles.org/schema/#boundary
 	if isBoundary and not (Find("maritime")=="yes") then
@@ -725,6 +737,11 @@ function way_function()
 		if write_name then rank=6 else rank=25 end
 		AttributeNumeric("rank", rank)
 	end
+
+
+
+  
+
 end
 
 -- Remap coastlines
